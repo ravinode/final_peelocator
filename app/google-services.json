@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "376496493836",
+    "firebase_url": "https://streak-65122.firebaseio.com",
+    "project_id": "streak-65122",
+    "storage_bucket": "streak-65122.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376496493836:android:4823f5b50f3905ba",
+        "android_client_info": {
+          "package_name": "com.peelocator.kira.streak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376496493836-8tlbldds1b0orbiu9ptqp6lddahrafff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3SD9fPwZUAgO_knkfjhKs5yzPUXRTmxA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

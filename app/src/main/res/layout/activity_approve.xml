@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/activity_horizontal_margin">
+
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/header"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:fontFamily="@font/basic"
+                android:gravity="center"
+                android:text="More Information"
+                android:textColor="@color/input_login"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/space"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="35dp"
+                android:textStyle="bold" />
+
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/pending"
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:bottom="3px"
+                android:fontFamily="@font/basic"
+                android:text="Name"
+                android:textColor="@color/input_login"
+                android:textSize="20dp" />
+
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/desc"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:fontFamily="@font/basic"
+                android:text="Name"
+                android:textColor="@color/input_login"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/space3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="10dp" />
+
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/distance"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:fontFamily="@font/basic"
+                android:text="Name"
+                android:textColor="@color/input_login"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/space1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:gravity="center_horizontal"
+                android:textSize="10dp"
+                android:textStyle="bold" />
+
+
+            <CheckBox
+                android:id="@+id/malec"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/basic"
+                android:text="Male" />
+
+            <CheckBox
+                android:id="@+id/femalec"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/basic"
+                android:text="Female" />
+
+            <CheckBox
+                android:id="@+id/wheel"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:fontFamily="@font/basic"
+                android:text="Wheelchair" />
+
+            <CheckBox
+                android:id="@+id/familyc"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:fontFamily="@font/basic"
+                android:text="Family" />
+
+
+            <TextView
+                android:id="@+id/space33"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="10dp" />
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/click"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:fontFamily="@font/basic"
+                android:text="Click Here for Approval"
+                android:textColor="@color/input_login"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/approve"
+                android:layout_width="44dp"
+                android:layout_height="27dp"
+                android:layout_marginTop="20dip"
+                android:layout_weight="1"
+                android:layout_gravity="left"
+                android:background="@drawable/green"
+                android:gravity="bottom"
+                android:textAllCaps="false" />
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/currentrating"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:fontFamily="@font/basic"
+                android:text="Current Rating"
+                android:textColor="@color/input_login"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/space11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="10dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cleaness" />
+
+
+            <RatingBar
+                android:id="@+id/cleaness"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:rating="5"
+                android:stepSize="1.0" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Service Level" />
+
+            <RatingBar
+                android:id="@+id/servicelevel"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:rating="5"
+                android:stepSize="1.0" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Over All Rating" />
+
+            <RatingBar
+                android:id="@+id/overall"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:rating="5"
+                android:stepSize="1.0" />
+
+            <TextView
+                android:id="@+id/space33"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="10dp" />
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/yourrating"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:fontFamily="@font/basic"
+                android:text="Provide your Rating"
+                android:textColor="@color/input_login"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/space12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="10dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cleanessTxt1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cleaness" />
+
+
+            <RatingBar
+                android:id="@+id/cleaness1"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:rating="5"
+                android:stepSize="1.0" />
+
+
+            <TextView
+                android:id="@+id/servicelevelTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Service Level" />
+
+            <RatingBar
+                android:id="@+id/servicelevel1"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:rating="5"
+                android:stepSize="1.0" />
+
+            <TextView
+                android:id="@+id/ova1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Over All Rating" />
+
+            <RatingBar
+                android:id="@+id/overall1"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:rating="5"
+                android:stepSize="1.0" />
+
+
+            <Button
+                android:id="@+id/update"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_gravity="left"
+                android:layout_marginTop="20dip"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:text="Submit Rating"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>
