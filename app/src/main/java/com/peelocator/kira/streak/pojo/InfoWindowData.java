@@ -13,6 +13,14 @@ public class InfoWindowData {
     private String wheel;
     private String family;
 
+    private String slat;
+    private String slong;
+    private String dlat;
+    private String dlong;
+
+
+
+
     public String getImage() {
         return image;
     }
@@ -99,5 +107,37 @@ public class InfoWindowData {
 
     public void setFamily(String family) {
         this.family = family;
+    }
+
+    public String getSlat() {
+        return slat;
+    }
+
+    public void setSlat(String slat) {
+        this.slat = slat;
+    }
+
+    public String getSlong() {
+        return slong;
+    }
+
+    public void setSlong(String slong) {
+        this.slong = slong;
+    }
+
+    public String getDlat() {
+        return dlat;
+    }
+
+    public void setDlat(String dlat) {
+        this.dlat = dlat;
+    }
+
+    public String getDlong() {
+        return dlong;
+    }
+
+    public void setDlong(String dlong) {
+        this.dlong = dlong;
     }
 }

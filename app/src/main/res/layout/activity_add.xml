@@ -30,8 +30,10 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="Location"
+                android:fontFamily="@font/basic"
+                android:textColor="@color/input_login"
                 android:textSize="25dp"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -41,7 +43,7 @@
                 android:id="@+id/locationEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:gravity="left"
                 android:textStyle="bold" />
                 />
 
@@ -60,7 +62,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:hint="Name"
+                    android:fontFamily="@font/basic"
                     android:inputType="textPersonName"
+                    android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
             </android.support.design.widget.TextInputLayout>
 
@@ -76,9 +80,10 @@
                     android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:hint="Description"
+                    android:fontFamily="@font/basic"
                     android:inputType="textMultiLine"
                     android:lines="3"
-                    android:textColor="@android:color/holo_red_light"
+                    android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
             </android.support.design.widget.TextInputLayout>
 
@@ -88,8 +93,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="Service Type"
+                android:textColor="@color/input_login"
                 android:textSize="25dp"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/space5"
@@ -116,12 +122,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
+                        android:fontFamily="@font/basic"
                         android:text="Free" />
 
                     <RadioButton
                         android:id="@+id/paid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/basic"
                         android:text="Paid" />
 
                 </RadioGroup>
@@ -136,6 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
+
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -143,9 +152,11 @@
                 android:id="@+id/gendertext"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:fontFamily="@font/basic"
                 android:text="Gender"
+                android:textColor="@color/input_login"
                 android:textSize="25dp"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/space4"
@@ -170,6 +181,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:layout_weight="1"
+                    android:fontFamily="@font/basic"
                     android:text="Male" />
 
                 <CheckBox
@@ -177,18 +189,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:fontFamily="@font/basic"
                     android:text="Female" />
 
                 <CheckBox
                     android:id="@+id/wheel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/basic"
                     android:text="Wheelchair" />
 
                 <CheckBox
                     android:id="@+id/familyc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/basic"
                     android:text="Family" />
 
 
@@ -208,8 +223,10 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="Rating"
+                android:textColor="@color/input_login"
+                android:fontFamily="@font/basic"
                 android:textSize="25dp"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/space6"
@@ -229,42 +246,69 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/basic"
                     android:text="Cleaness" />
+
 
 
                 <RatingBar
                     android:id="@+id/cleaness"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="-26dp"
+                    android:numStars="5"
+                    android:layout_gravity="left"
+                    android:stepSize="0.1"
                     android:rating="5"
-                    android:stepSize="1.0" />
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp"
+                    android:isIndicator="false" />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/basic"
                     android:text="Service Level" />
+
 
                 <RatingBar
                     android:id="@+id/servicelevel"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="-26dp"
+                    android:numStars="5"
+                    android:layout_gravity="left"
+                    android:stepSize="0.1"
                     android:rating="5"
-                    android:stepSize="1.0" />
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp"
+                    android:isIndicator="false" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/basic"
                     android:text="Over All Rating" />
 
                 <RatingBar
                     android:id="@+id/overall"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="-26dp"
+                    android:numStars="5"
+                    android:layout_gravity="left"
+                    android:stepSize="0.1"
                     android:rating="5"
-                    android:stepSize="1.0" />
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp"
+                    android:isIndicator="false" />
 
 
             </android.support.design.widget.TextInputLayout>
@@ -277,21 +321,19 @@
                 android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/basic"
                 android:text="Submit"
                 android:textColor="@android:color/white"
                 app:backgroundTint="@android:color/holo_blue_dark" />
 
-
-            <Button
-                android:id="@+id/btn_reset_password"
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/submit1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:layout_weight="1"
-                android:background="@null"
-                android:text="Powered by Kira"
-                android:textAllCaps="false"
-                android:textColor="#FFF" />
+                android:fontFamily="@font/basic"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@android:color/white" />
+
 
         </LinearLayout>
 

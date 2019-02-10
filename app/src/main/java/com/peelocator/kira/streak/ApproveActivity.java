@@ -1,9 +1,13 @@
 package com.peelocator.kira.streak;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
@@ -23,6 +27,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.peelocator.kira.streak.fragment.ScoreActivity;
 import com.peelocator.kira.streak.pojo.Point;
 import com.peelocator.kira.streak.pojo.Rate;
 import com.peelocator.kira.streak.util.LoadProperties;
@@ -50,9 +55,15 @@ public class ApproveActivity extends AppCompatActivity {
     String femaleS = null;
     String wheelS = null;
     String familyS = null;
+    private String slat;
+    private String slong;
+    private String dlat;
+    private String dlong;
     RatingBar cleanessR = null;
     RatingBar service_LevelR = null;
     RatingBar overallR = null;
+    TextView click = null;
+    Button submit = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +83,7 @@ public class ApproveActivity extends AppCompatActivity {
         TextView cleantxt = (TextView) findViewById(R.id.cleanessTxt1);
         TextView desc = (TextView) findViewById(R.id.desc);
         TextView dista = (TextView) findViewById(R.id.distance);
-        TextView click = (TextView) findViewById(R.id.click);
+        click = (TextView) findViewById(R.id.click);
         final RatingBar cleaness = (RatingBar)findViewById(R.id.cleaness1);
         final RatingBar service_Level = (RatingBar)findViewById(R.id.servicelevel1);
         final RatingBar overall = (RatingBar)findViewById(R.id.overall1);
@@ -86,8 +97,10 @@ public class ApproveActivity extends AppCompatActivity {
         service_LevelR = (RatingBar)findViewById(R.id.servicelevel);
         overallR = (RatingBar)findViewById(R.id.overall);
 
-        Button submit = (Button) findViewById(R.id.approve);
+        submit = (Button) findViewById(R.id.approve);
         Button rate = (Button) findViewById(R.id.update);
+
+        Button navigate = (Button) findViewById(R.id.navigate);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null)
@@ -103,6 +116,11 @@ public class ApproveActivity extends AppCompatActivity {
             femaleS = extras.getString("female");
             wheelS = extras.getString("wheel");
             familyS = extras.getString("family");
+
+            slat = extras.getString("slat");
+            slong = extras.getString("slon");
+            dlat = extras.getString("dlat");
+            dlong = extras.getString("dlon");
 
             if(maleS.equalsIgnoreCase("1"))
             {
@@ -120,13 +138,15 @@ public class ApproveActivity extends AppCompatActivity {
             {
                 family.setChecked(true);
             }
-
-
+            if(status.equalsIgnoreCase("1"))
+            click.setText("Status: Not Approved");
+            if(status.equalsIgnoreCase("2"))
+                click.setText("Status: Verified");
             FirebaseUser user = null;
             user = FirebaseAuth.getInstance().getCurrentUser();
-            Toast.makeText(getApplicationContext(), "Current location:"+extras.get("userid"), Toast.LENGTH_LONG).show();
+          //  Toast.makeText(getApplicationContext(), "Current location:"+extras.get("userid"), Toast.LENGTH_LONG).show();
 //
-            Toast.makeText(getApplicationContext(), "Current location:"+user.getEmail(), Toast.LENGTH_LONG).show();
+          //  Toast.makeText(getApplicationContext(), "Current location:"+user.getEmail(), Toast.LENGTH_LONG).show();
 //
             if(user.getEmail().equalsIgnoreCase(email))
             {
@@ -138,27 +158,18 @@ public class ApproveActivity extends AppCompatActivity {
                 sl.setVisibility(View.INVISIBLE);
                 ov.setVisibility(View.INVISIBLE);
                 rate.setVisibility(View.INVISIBLE);
-                click.setVisibility(View.INVISIBLE);
                 submit.setVisibility(View.INVISIBLE);
 
             }
 
-            name.setText("Name :"+nameTxt);
-            desc.setText("Description :"+descTxt);
-            dista.setText("Distance :"+distance);
+            name.setText("Name: "+nameTxt);
+            desc.setText("Description: "+descTxt);
+            dista.setText("Distance: "+distance);
             getRating(id,getApplicationContext());
-            //Toast.makeText(getApplicationContext(), "Current location:"+extras.get("status"), Toast.LENGTH_LONG).show();
             if("2".equalsIgnoreCase(status))
             {
                 submit.setVisibility(View.INVISIBLE);
-click.setVisibility(View.INVISIBLE);
             }
-        //    Toast.makeText(getApplicationContext(), "Current location:"+extras.get("id"), Toast.LENGTH_LONG).show();
-//                if (null != location) {
-
-
-
-
         }
 
         submit.setOnClickListener(new View.OnClickListener()
@@ -168,6 +179,25 @@ click.setVisibility(View.INVISIBLE);
             {
 
                 approveFlush(id,getApplicationContext());
+                AlertDialog alert = new AlertDialog.Builder(ApproveActivity.this).create();
+                alert.setTitle("Approved");
+                alert.setMessage("Thanks for approving");
+                alert.show();
+
+            }
+        });
+
+
+        navigate.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String uri = "http://maps.google.com/maps?saddr=" + slat + "," + slong + "&daddr=" + dlat + "," + dlong;
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setPackage("com.google.android.apps.maps");
+                startActivity(intent);
+
             }
         });
 
@@ -178,8 +208,33 @@ click.setVisibility(View.INVISIBLE);
             {
 
                 rate(id,Double.toString(overall.getRating()),Double.toString(cleaness.getRating()), Double.toString(service_Level.getRating()),getApplicationContext());
-              //  Toast.makeText(getApplicationContext(), "Current location:", Toast.LENGTH_LONG).show();
+                approveFlush(id,getApplicationContext());
 
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        ApproveActivity.this);
+                // set title
+                alertDialogBuilder.setTitle("Success");
+                alertDialogBuilder.setCancelable(true);
+                // set dialog message
+                alertDialogBuilder
+                        .setMessage("Thank you for submitting")
+                        .setCancelable(true)
+                        .setPositiveButton( "Okay",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                try {
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(intent);
+                                } catch (Exception e) {
+                                    //Exception
+                                }
+                            }
+                        });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
             }
         });
 
@@ -212,12 +267,14 @@ click.setVisibility(View.INVISIBLE);
                         @Override
                         public void onResponse(JSONObject response) {
                             List<Point> pointList = new ArrayList<>();
+                            click.setText("Status: Verified");
+                            submit.setVisibility(View.INVISIBLE);
 
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, "Error"+error, Toast.LENGTH_LONG).show();
+                   // Toast.makeText(context, "Error"+error, Toast.LENGTH_LONG).show();
 
 
                 }
@@ -250,10 +307,6 @@ click.setVisibility(View.INVISIBLE);
         try {
 
             String url = null;
-
-            Toast.makeText(context, "C" + cleanessR.getRating(), Toast.LENGTH_LONG).show();
-            Toast.makeText(context, "S" + cleanessR.getRating(), Toast.LENGTH_LONG).show();
-            Toast.makeText(context, "O" + cleanessR.getRating(), Toast.LENGTH_LONG).show();
             JSONObject json = new JSONObject();
             try {
                 json.put("id",id);
@@ -284,7 +337,7 @@ click.setVisibility(View.INVISIBLE);
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, "Error"+error, Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(context, "Error"+error, Toast.LENGTH_LONG).show();
 
 
                 }
@@ -368,7 +421,9 @@ click.setVisibility(View.INVISIBLE);
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, "Error"+error, Toast.LENGTH_LONG).show();
+                   // Toast.makeText(context, "Error"+error, Toast.LENGTH_LONG).show();
+                   // Toast.makeText(context, "Error"+error, Toast.LENGTH_LONG).show();
+                   // Toast.makeText(context, "Error"+error, Toast.LENGTH_LONG).show();
 
 
                 }

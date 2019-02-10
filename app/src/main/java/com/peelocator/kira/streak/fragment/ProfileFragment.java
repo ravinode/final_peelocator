@@ -48,7 +48,7 @@ public class ProfileFragment extends Fragment {
     private Button btnSendResetEmail,
          sendEmail, signOut;
 
-    private EditText oldEmail, password;
+    private EditText oldEmail;
     private ProgressBar progressBar;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
@@ -118,9 +118,6 @@ public class ProfileFragment extends Fragment {
         signOut = (Button) view.findViewById(R.id.sign_out);
 
         oldEmail = (EditText) view.findViewById(R.id.old_email);
-        password = (EditText) view.findViewById(R.id.password);
-
-
 
         sendEmail.setVisibility(View.GONE);
 
@@ -140,9 +137,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 oldEmail.setVisibility(View.VISIBLE);
-
-                password.setVisibility(View.GONE);
-
                 sendEmail.setVisibility(View.VISIBLE);
 
             }

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.peelocator.kira.streak.ApproveActivity;
@@ -88,9 +90,21 @@ public class MapLocationFragment extends Fragment implements GoogleMap.OnMarkerC
         mMapView= (MapView) rootView.findViewById(R.id.mapview);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
-
         checkLocationPermission();
         getFlush();
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Task<Location> task = client.getLastLocation();
+
+            task.addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location != null) {
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 14));
+                    }
+                }
+            });
+        }
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -110,6 +124,9 @@ public class MapLocationFragment extends Fragment implements GoogleMap.OnMarkerC
                             == PackageManager.PERMISSION_GRANTED) {
                         googleMap.setMyLocationEnabled(true);
                         googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+
+
+
                     }
                 }
 
@@ -140,7 +157,8 @@ public class MapLocationFragment extends Fragment implements GoogleMap.OnMarkerC
                     req.setLat(location.getLatitude());
                     req.setLog(location.getLongitude());
                     getLocation(req, getActivity());
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 14));
+
+                   // googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 14));
                 }
             }
         });
@@ -229,7 +247,7 @@ public class MapLocationFragment extends Fragment implements GoogleMap.OnMarkerC
 
         }
     }
-    public  void getLocation(LatLongReq latLong, final Context context) {
+    public  void getLocation(final LatLongReq latLong, final Context context) {
         try {
             String url = null;
 
@@ -238,7 +256,7 @@ public class MapLocationFragment extends Fragment implements GoogleMap.OnMarkerC
 
                 json.put("latitude", latLong.getLat().toString());
                 json.put("longtitude", latLong.getLog().toString());
-                json.put("distance", "40");
+                json.put("distance", "2500000");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -273,7 +291,7 @@ public class MapLocationFragment extends Fragment implements GoogleMap.OnMarkerC
                                     String family = objectInArray.getString("family");
 
                                    // Toast.makeText(context, "Hello" + wheel, Toast.LENGTH_LONG).show();
-                                    drawMarker(context, new LatLng(lat, log), objectInArray.getString("male"),objectInArray.getString("female"),objectInArray.getString("wheel"),objectInArray.getString("family"),objectInArray.getString("name"), objectInArray.getString("description"), objectInArray.getString("distance"),service,status,id,emailID);
+                                    drawMarker(new LatLng(Double.parseDouble(objectInArray.getString("latitude")), Double.parseDouble(objectInArray.getString("longitude"))),context, new LatLng(lat, log), objectInArray.getString("male"),objectInArray.getString("female"),objectInArray.getString("wheel"),objectInArray.getString("family"),objectInArray.getString("name"), objectInArray.getString("description"), objectInArray.getString("distance"),service,status,id,emailID);
 
                                 }
                             } catch (JSONException e) {
@@ -312,9 +330,8 @@ public class MapLocationFragment extends Fragment implements GoogleMap.OnMarkerC
         }
     }
 
-    private  void drawMarker(final Context context, final LatLng point, final String male,final String female, final String wheel, final String family,final String text, final String description, final String distance, final String serviceType, final String status,final String id,final String emailID) {
-System.out.print("Value"+wheel);
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(point,12f));
+    private  void drawMarker(final LatLng source,final Context context, final LatLng point, final String male,final String female, final String wheel, final String family,final String text, final String description, final String distance, final String serviceType, final String status,final String id,final String emailID) {
+       // googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(point,12f));
         marker = googleMap.addMarker(new MarkerOptions().position(point).title(text).alpha(0.7f).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         googleMap.getUiSettings().setCompassEnabled(true);
         googleMap.getUiSettings().setMapToolbarEnabled(true);
@@ -337,6 +354,10 @@ System.out.print("Value"+wheel);
         info.setWheel(wheel);
         info.setFamily(family);
         info.setDescription(description);
+        info.setDlat(String.valueOf(point.latitude));
+        info.setDlong(String.valueOf(point.longitude));
+        info.setSlat(String.valueOf(source.latitude));
+        info.setSlong(String.valueOf(source.longitude));
         marker.setTag(info);
         CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(context);
         googleMap.setInfoWindowAdapter(customInfoWindow);
@@ -377,7 +398,10 @@ System.out.print("Value"+wheel);
                     intent.putExtra("wheel",infoWindowData.getWheel());
                     intent.putExtra("family",infoWindowData.getFamily());
 
-
+                    intent.putExtra("slat",infoWindowData.getSlat());
+                    intent.putExtra("slon",infoWindowData.getSlong());
+                    intent.putExtra("dlat",infoWindowData.getDlat());
+                    intent.putExtra("dlon",infoWindowData.getSlong());
 
 
 

@@ -34,6 +34,8 @@ public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter {
 
         TextView price_v = view.findViewById(R.id.price);
 
+        TextView distance_v = view.findViewById(R.id.distance);
+
         TextView status_txt = view.findViewById(R.id.status_txt);
 
         ImageView image  = (ImageView) view.findViewById(R.id.status);
@@ -46,6 +48,8 @@ public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter {
         InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
 
         price_v.setText("Service: "+infoWindowData.getPrice());
+
+        distance_v.setText("Distance: "+infoWindowData.getDistance());
 
         if("2".equalsIgnoreCase(infoWindowData.getStatus())) {
             image.setImageDrawable(res.getDrawable(R.drawable.green));

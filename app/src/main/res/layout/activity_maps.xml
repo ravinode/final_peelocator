@@ -4,7 +4,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.peelocator.kira.kiki.fragment.MapLocationFragment">
+    tools:context="com.peelocator.kira.streak.fragment.MapLocationFragment">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

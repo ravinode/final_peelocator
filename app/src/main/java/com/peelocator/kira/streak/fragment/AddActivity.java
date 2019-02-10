@@ -9,6 +9,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,7 +109,9 @@ public class AddActivity extends Fragment{
 
         View view = inflater.inflate(R.layout.activity_add, container, false);
 
+
         final EditText name = (EditText)view.findViewById(R.id.name);
+
         loc = (EditText)view.findViewById(R.id.locationEdit);
         final EditText desc = (EditText)view.findViewById(R.id.desc);
         RadioGroup service = (RadioGroup)view.findViewById(R.id.service);
@@ -221,6 +224,31 @@ final CheckBox male = (CheckBox) view.findViewById(R.id.malec);
                              addReq.setRating(Double.toString(overall.getRating()));
                             addReq.setLatitude(String.valueOf(location.getLatitude()));
                             addReq.setLongitude(String.valueOf(location.getLongitude()));
+
+                            if (TextUtils.isEmpty(name.getText().toString())) {
+                                Toast.makeText(getContext(), "Name is missing!", Toast.LENGTH_SHORT).show();
+                                name.setError("Name is missing");
+                                return;
+                            }
+
+                            if (TextUtils.isEmpty(desc.getText().toString())) {
+                                Toast.makeText(getContext(), "Description is missing!", Toast.LENGTH_SHORT).show();
+                                desc.setError("Description is missing");
+                                return;
+                            }
+
+                            if (!service_button.isChecked()) {
+                                Toast.makeText(getContext(), "Service type is missing!", Toast.LENGTH_SHORT).show();
+                                service_button.setError("Service type is missing");
+                                return;
+                            }
+
+                            if (!male.isChecked() && !female.isChecked() && !wheel.isChecked() && !family.isChecked()) {
+                                Toast.makeText(getContext(), "Gender is missing!", Toast.LENGTH_SHORT).show();
+                                name.setError("Gender is missing");
+                                return;
+                            }
+
                             addFlush(addReq,getContext());
                         }
                     }

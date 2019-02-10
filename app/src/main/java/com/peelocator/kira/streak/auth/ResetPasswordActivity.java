@@ -1,8 +1,11 @@
 package com.peelocator.kira.streak.auth;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +28,13 @@ public class ResetPasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic1);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#FFFFFF'>      PEELOCATOR</font>"));
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
+
         setContentView(R.layout.activity_reset_password);
 
         inputEmail = (EditText) findViewById(R.id.email);
